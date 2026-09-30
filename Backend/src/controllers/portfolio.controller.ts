@@ -10,6 +10,7 @@ import {
   mergePortfolioData,
   fetchAllHoldings,
 } from "../services/portfolio.service";
+import { fetchCMPYahoo } from "../services/yahoo.service";
 
 export const getHoldings = (req: Request, res: Response): void => {
   try {
@@ -39,6 +40,27 @@ export const getCalPortData = (req: Request, res: Response): void => {
     res.status(500).json({
       success: false,
       msg: e,
+    });
+  }
+};
+
+export const getYahooCMP = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const data = await fetchCMPYahoo();
+
+    res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (e) {
+    console.error("Yahoo error:", e);
+
+    res.status(500).json({
+      success: false,
+      msg: "Failed to fetch Yahoo Finance data",
     });
   }
 };

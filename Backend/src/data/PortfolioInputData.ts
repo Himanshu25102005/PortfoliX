@@ -7,6 +7,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 50,
     exchange: "HDFCBANK",
     sector: "Financial Sector",
+    yahooSymbol: "HDFCBANK.NS",
   },
   {
     stockName: "Bajaj Finance",
@@ -14,6 +15,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 15,
     exchange: "BAJFINANCE",
     sector: "Financial Sector",
+    yahooSymbol: "BAJFINANCE.NS",
   },
   {
     stockName: "ICICI Bank",
@@ -21,6 +23,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 84,
     exchange: "532174",
     sector: "Financial Sector",
+    yahooSymbol: "ICICIBANK.NS",
   },
   {
     stockName: "Bajaj Housing",
@@ -28,6 +31,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 504,
     exchange: "544252",
     sector: "Financial Sector",
+    yahooSymbol: "BAJAJHFL.NS",
   },
   {
     stockName: "Savani Financials",
@@ -35,6 +39,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 1080,
     exchange: "511577",
     sector: "Financial Sector",
+    yahooSymbol: "SAVFI.NS",
   },
   {
     stockName: "Affle India",
@@ -42,6 +47,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 50,
     exchange: "AFFLE",
     sector: "Tech Sector",
+    yahooSymbol: "AFFLE.NS",
   },
   {
     stockName: "LTI Mindtree",
@@ -49,6 +55,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 16,
     exchange: "LTIM",
     sector: "Tech Sector",
+    yahooSymbol: "LTM.NS",
   },
   {
     stockName: "KPIT Tech",
@@ -56,6 +63,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 61,
     exchange: "542651",
     sector: "Tech Sector",
+    yahooSymbol: "KPITTECH.NS",
   },
   {
     stockName: "Tata Tech",
@@ -63,6 +71,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 63,
     exchange: "544028",
     sector: "Tech Sector",
+    yahooSymbol: "TATATECH.NS",
   },
   {
     stockName: "BLS E-Services",
@@ -70,6 +79,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 191,
     exchange: "544107",
     sector: "Tech Sector",
+    yahooSymbol: "BLSE.NS",
   },
   {
     stockName: "Tanla",
@@ -77,6 +87,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 45,
     exchange: "532790",
     sector: "Tech Sector",
+    yahooSymbol: "TANLA.NS",
   },
   {
     stockName: "Dmart",
@@ -84,6 +95,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 27,
     exchange: "DMART",
     sector: "Consumer",
+    yahooSymbol: "DMART.NS",
   },
   {
     stockName: "Tata Consumer",
@@ -91,6 +103,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 90,
     exchange: "532540",
     sector: "Consumer",
+    yahooSymbol: "TATACONSUM.NS",
   },
   {
     stockName: "Pidilite",
@@ -98,6 +111,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 36,
     exchange: "500331",
     sector: "Consumer",
+    yahooSymbol: "PIDILITIND.NS",
   },
   {
     stockName: "Tata Power",
@@ -105,6 +119,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 225,
     exchange: "500400",
     sector: "Power",
+    yahooSymbol: "TATAPOWER.NS",
   },
   {
     stockName: "KPI Green",
@@ -112,6 +127,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 50,
     exchange: "542323",
     sector: "Power",
+    yahooSymbol: "KPIGREEN.NS",
   },
   {
     stockName: "Suzlon",
@@ -119,6 +135,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 450,
     exchange: "532667",
     sector: "Power",
+    yahooSymbol: "SUZLON.NS",
   },
   {
     stockName: "Gensol",
@@ -126,6 +143,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 45,
     exchange: "542851",
     sector: "Power",
+    yahooSymbol: "GENSOL.NS",
   },
   {
     stockName: "Hariom Pipes",
@@ -133,6 +151,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 60,
     exchange: "543517",
     sector: "Pipe Sector",
+    yahooSymbol: "HARIOMPIPE.NS",
   },
   {
     stockName: "Astral",
@@ -140,6 +159,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 56,
     exchange: "ASTRAL",
     sector: "Pipe Sector",
+    yahooSymbol: "ASTRAL.NS",
   },
   {
     stockName: "Polycab",
@@ -147,6 +167,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 28,
     exchange: "542652",
     sector: "Pipe Sector",
+    yahooSymbol: "POLYCAB.NS",
   },
   {
     stockName: "Clean Science",
@@ -154,6 +175,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 32,
     exchange: "543318",
     sector: "Others",
+    yahooSymbol: "CLEAN.NS",
   },
   {
     stockName: "Deepak Nitrite",
@@ -161,6 +183,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 27,
     exchange: "506401",
     sector: "Others",
+    yahooSymbol: "DEEPAKNTR.NS",
   },
   {
     stockName: "Fine Organic",
@@ -168,6 +191,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 16,
     exchange: "541557",
     sector: "Others",
+    yahooSymbol: "FINEORG.NS",
   },
   {
     stockName: "Gravita",
@@ -175,6 +199,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 8,
     exchange: "533282",
     sector: "Others",
+    yahooSymbol: "GRAVITA.NS",
   },
   {
     stockName: "SBI Life",
@@ -182,6 +207,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 49,
     exchange: "540719",
     sector: "Others",
+    yahooSymbol: "SBILIFE.NS",
   },
   {
     stockName: "Infy",
@@ -189,6 +215,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 36,
     exchange: "500209",
     sector: null,
+    yahooSymbol: "INFY.NS",
   },
   {
     stockName: "Happeist Mind",
@@ -196,6 +223,7 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 45,
     exchange: "543237",
     sector: null,
+    yahooSymbol: "HAPPSTMNDS.NS",
   },
   {
     stockName: "Easemytrip",
@@ -203,5 +231,6 @@ export const holdings_data: Portfolio_input_type[] = [
     quantity: 1332,
     exchange: "543272",
     sector: null,
+    yahooSymbol: "EASEMYTRIP.NS",
   },
 ];

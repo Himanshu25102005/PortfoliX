@@ -12,14 +12,19 @@ export interface Portfolio_input_type {
   stockName: string;
   purchasePrice: number;
   quantity: number;
-  exchange: string ;
+  exchange: string;
   sector: string | null;
+  yahooSymbol:string
 }
-
 
 export interface Calc_output_val_type {
   investment: number | null;
   portfolio_percentage: number | null;
   present_val: number | null;
   gain_loss: number | null;
+}
+
+export interface yahooCMP_type {
+  symbol: string;
+  CMP: number | null;
 }
