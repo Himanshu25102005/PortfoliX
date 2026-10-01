@@ -214,7 +214,7 @@ export const holdings_data: Portfolio_input_type[] = [
     purchasePrice: 1647,
     quantity: 36,
     exchange: "500209",
-    sector: null,
+    sector: "Others",
     yahooSymbol: "INFY.NS",
   },
   {
@@ -222,7 +222,7 @@ export const holdings_data: Portfolio_input_type[] = [
     purchasePrice: 1103,
     quantity: 45,
     exchange: "543237",
-    sector: null,
+    sector: "Others",
     yahooSymbol: "HAPPSTMNDS.NS",
   },
   {
@@ -230,7 +230,7 @@ export const holdings_data: Portfolio_input_type[] = [
     purchasePrice: 20,
     quantity: 1332,
     exchange: "543272",
-    sector: null,
+    sector: "Others",
     yahooSymbol: "EASEMYTRIP.NS",
   },
 ];

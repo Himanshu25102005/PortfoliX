@@ -7,11 +7,13 @@ Portfolio %
 Present Value
 Gain/Loss
 Sector totals */
+import { CombinedOutput } from "../services/portfolio.service";
 import { fetchCMPYahoo } from "../services/yahoo.service";
 import type {
   Portfolio_input_type,
   Calc_output_val_type,
   yahooCMP_type,
+  Sector_summ_type,
 } from "../types/portfolio";
 
 export const Calc_output = (
@@ -42,22 +44,32 @@ export const Calc_output = (
     };
   });
 };
-/* 
-const CMP = 100;
-data.forEach((val) => {
-        const investment:number = val.purchasePrice * val.quantity;
-        const portfolio_percentage:number = (investment/total_invest) * 100;
-        const present_val:number = CMP * val.quantity;
-        const gain_loss:number = present_val-investment
 
-        const temp_obj: Calc_output_val_type = {
-            investment: investment,
-            portfolio_percentage: portfolio_percentage,
-            present_val: present_val,
-            gain_loss: gain_loss
-        };
+export const calSectorSummary = (
+  data: CombinedOutput[],
+): Sector_summ_type[] => {
 
-        res.push(temp_obj)
-    }); */
+  const sectorMap = new Map<string, Sector_summ_type>();
 
-// return res;
+  data.forEach((holding) => {
+
+    if (!holding.sector) return;
+
+    const existing = sectorMap.get(holding.sector);
+
+    if (existing) {
+      existing.total_investment += holding.investment;
+      existing.total_present_val += holding.present_val ?? 0;
+      existing.gain_loss += holding.gain_loss ?? 0;
+    } else {
+      sectorMap.set(holding.sector, {
+        sector: holding.sector,
+        total_investment: holding.investment,
+        total_present_val: holding.present_val ?? 0,
+        gain_loss: holding.gain_loss ?? 0,
+      });
+    }
+  });
+
+  return Array.from(sectorMap.values());
+};

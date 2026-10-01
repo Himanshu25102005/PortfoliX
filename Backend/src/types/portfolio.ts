@@ -18,7 +18,7 @@ export interface Portfolio_input_type {
 }
 
 export interface Calc_output_val_type {
-  investment: number | null;
+  investment: number ;
   portfolio_percentage: number | null;
   present_val: number | null;
   gain_loss: number | null;
@@ -34,4 +34,16 @@ export interface google_out_type {
   symbol: string;
   PE_ratio: number | null;
   latestEarnings: number | null;
+}
+
+/* Total Investment
+• Total Present Value
+• Gain/Loss
+ */
+
+export interface Sector_summ_type {
+  sector: string;
+  total_investment: number;
+  total_present_val: number;
+  gain_loss: number;
 }
