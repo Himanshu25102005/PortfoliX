@@ -1,8 +1,3 @@
-/* portfolio.controller.ts
-getPortfolio()
-Receives request
-Calls portfolio service
-Sends response/error */
 import { Request, Response, NextFunction } from "express";
 import { holdings_data } from "../data/PortfolioInputData";
 import type { Portfolio_input_type } from "../types/portfolio";

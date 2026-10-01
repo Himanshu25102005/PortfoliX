@@ -6,7 +6,7 @@ import app from "../src/app";
 
 const debug = debugModule("backend:server");
 
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "5000");
 
 app.set("port", port);
 

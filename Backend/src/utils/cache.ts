@@ -1,7 +1,35 @@
-/* cache.ts
+import { CacheEntry } from "../types/portfolio";
 
-Handles:
+export class TTLCache<T> {
+  private cache = new Map<string, CacheEntry<T>>();
 
-Cached market data
-Cache expiry/TTL
-Prevent unnecessary external API requests */
+  set(key: string, data: T, ttl: number): void {
+    const expiresAt = Date.now() + ttl;
+
+    this.cache.set(key, {
+      data,
+      expiresAt,
+    });
+  }
+
+  get(key: string): T | null {
+    const entry = this.cache.get(key);
+
+    if (!entry) {
+      return null;
+    }
+    if (Date.now() > entry.expiresAt) {
+      this.cache.delete(key);
+      return null;
+    }
+    return entry.data;
+  }
+
+  delete(key: string): void {
+    this.cache.delete(key);
+  }
+
+  clear(): void {
+    this.cache.clear();
+  }
+}

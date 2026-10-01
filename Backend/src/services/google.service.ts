@@ -1,16 +1,22 @@
-/* google.service.ts
-Fetch P/E ratio
-Fetch latest earnings
-Normalize response
-Handle Google Finance errors */
 import "dotenv/config";
 import { getJson } from "serpapi";
 import { holdings_data } from "../data/PortfolioInputData";
 import { google_out_type } from "../types/portfolio";
+import { TTLCache } from "../utils/cache";
+
+const googleCache = new TTLCache<google_out_type>();
+
+const GOOGLE_CACHE_TTL = 60 * 60 * 1000;
 
 export const fetchGoogleFinance = (
   symbol: string,
 ): Promise<google_out_type> => {
+  const cachedData = googleCache.get(symbol);
+
+  if (cachedData) {
+    return Promise.resolve(cachedData);
+  }
+
   return new Promise((resolve, reject) => {
     getJson(
       {
@@ -44,11 +50,15 @@ export const fetchGoogleFinance = (
 
           const peRatio = peRatioData ? Number(peRatioData.value) : null;
 
-          resolve({
+          const result: google_out_type = {
             symbol,
             PE_ratio: peRatio,
             latestEarnings,
-          });
+          };
+
+          googleCache.set(symbol, result, GOOGLE_CACHE_TTL);
+
+          resolve(result);
         } catch (error) {
           reject(error);
         }
@@ -59,10 +69,13 @@ export const fetchGoogleFinance = (
 
 export const MainGoogleService = async (): Promise<google_out_type[]> => {
   const GoogleCode: string[] = [];
-  holdings_data.map((holding, index) => {
+
+  holdings_data.map((holding) => {
     const str = holding.yahooSymbol;
     const parts = str.split(".");
+
     parts[0] = parts[0] + ":NSE";
+
     GoogleCode.push(parts[0]);
   });
 

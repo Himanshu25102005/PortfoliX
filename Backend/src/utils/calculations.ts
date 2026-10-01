@@ -1,12 +1,3 @@
-/* calculations.ts
-
-Handles:
-
-Investment
-Portfolio %
-Present Value
-Gain/Loss
-Sector totals */
 import { CombinedOutput } from "../services/portfolio.service";
 import { fetchCMPYahoo } from "../services/yahoo.service";
 import type {

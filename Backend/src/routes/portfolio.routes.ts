@@ -1,9 +1,6 @@
 import express from "express";
 import {
   getCalPortData,
-  getGoogleFinData,
-  getHoldings,
-  getYahooCMP,
 } from "../controllers/portfolio.controller";
 import { fetchCMPYahoo } from "../services/yahoo.service";
 const router = express.Router();

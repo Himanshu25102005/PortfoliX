@@ -1,14 +1,3 @@
-/* portfolio.service.ts
-
-Main business logic.
-
-Load portfolio.json
-Get market data
-Combine everything
-Calculate portfolio values
-Group by sector
-Return final portfolio response */
-
 import { holdings_data } from "../data/PortfolioInputData";
 import type {
   Calc_output_val_type,

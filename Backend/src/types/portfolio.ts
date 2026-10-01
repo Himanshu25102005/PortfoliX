@@ -1,13 +1,3 @@
-/* portfolio.ts
-
-TypeScript types/interfaces for:
-
-Portfolio holding
-Market data
-Processed stock
-Sector summary
-Portfolio response */
-
 export interface Portfolio_input_type {
   stockName: string;
   purchasePrice: number;
@@ -36,14 +26,14 @@ export interface google_out_type {
   latestEarnings: number | null;
 }
 
-/* Total Investment
-• Total Present Value
-• Gain/Loss
- */
-
 export interface Sector_summ_type {
   sector: string;
   total_investment: number;
   total_present_val: number;
   gain_loss: number;
+}
+
+export interface CacheEntry<T> {
+  data: T;
+  expiresAt: number;
 }
