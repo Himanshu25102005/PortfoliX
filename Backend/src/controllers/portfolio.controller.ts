@@ -28,9 +28,9 @@ export const getHoldings = (req: Request, res: Response): void => {
   }
 };
 
-export const getCalPortData = (req: Request, res: Response): void => {
+export const getCalPortData = async(req: Request, res: Response): Promise<void> => {
   try {
-    const data = mergePortfolioData();
+    const data = await mergePortfolioData();
 
     res.status(200).json({
       success: true,
@@ -46,7 +46,7 @@ export const getCalPortData = (req: Request, res: Response): void => {
 
 export const getYahooCMP = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const data = await fetchCMPYahoo();

@@ -10,16 +10,12 @@ import type {
   yahooCMP_type,
 } from "../types/portfolio";
 import createYahooFinance from "yahoo-finance2";
-import quote, {
-  type Quote,
-} from "yahoo-finance2/modules/quote";
+import quote, { type Quote } from "yahoo-finance2/modules/quote";
 
 /* async function fetchIndianStockPrices() {
-  // Array of formatted NSE (.NS) and BSE (.BO) tickers
   const tickers = ['RELIANCE.NS', 'TCS.NS', '500325.BO'];
   
   try {
-    // Fetch all stock prices in parallel directly
     const quotes = await yahooFinance.quote(tickers);
     
     quotes.forEach(stock => {
@@ -37,9 +33,8 @@ import quote, {
 const yahooFinance = new createYahooFinance();
 
 export const fetchCMPYahoo = async (): Promise<yahooCMP_type[]> => {
-
   const symbolArr: string[] = holdings_data.map(
-    (holding) => holding.yahooSymbol
+    (holding) => holding.yahooSymbol,
   );
 
   console.log("Requested symbols:", symbolArr.length);
@@ -49,22 +44,15 @@ export const fetchCMPYahoo = async (): Promise<yahooCMP_type[]> => {
 
   console.log("Received quotes:", quotes.length);
 
-  const quoteMap = new Map(
-    quotes.map((quote) => [
-      quote.symbol,
-      quote
-    ])
-  );
+  const quoteMap = new Map(quotes.map((quote) => [quote.symbol, quote]));
 
   const data: yahooCMP_type[] = holdings_data.map((holding) => {
-
     const matchingQuote = quoteMap.get(holding.yahooSymbol);
-
+    // console.log("matching quote: ", matchingQuote);
     return {
       symbol: holding.yahooSymbol,
-      CMP: matchingQuote?.regularMarketPrice ?? null
+      CMP: matchingQuote?.regularMarketPrice ?? null,
     };
-
   });
 
   return data;

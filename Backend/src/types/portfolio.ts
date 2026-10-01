@@ -22,6 +22,7 @@ export interface Calc_output_val_type {
   portfolio_percentage: number | null;
   present_val: number | null;
   gain_loss: number | null;
+  liveCMP: number | null
 }
 
 export interface yahooCMP_type {

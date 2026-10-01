@@ -7,17 +7,45 @@ Portfolio %
 Present Value
 Gain/Loss
 Sector totals */
-import type { Portfolio_input_type, Calc_output_val_type } from "../types/portfolio";
+import { fetchCMPYahoo } from "../services/yahoo.service";
+import type {
+  Portfolio_input_type,
+  Calc_output_val_type,
+} from "../types/portfolio";
 
-export const Calc_output = (data:Portfolio_input_type[]):Calc_output_val_type[] => {
-    const res:Calc_output_val_type[] = [];
-    var total_invest:number = 0;
-    const CMP = 1000;
-    for(let i:number =0; i<data.length; i++)
-    {
-        total_invest += data[i].purchasePrice * data[i].quantity;
-    }
-    data.forEach((val) => {
+export const Calc_output = async (
+  data: Portfolio_input_type[],
+): Promise<Calc_output_val_type[]> => {
+  const CMP_Data = await fetchCMPYahoo();
+
+  var total_invest: number = 0;
+  for (let i: number = 0; i < data.length; i++) {
+    total_invest += data[i].purchasePrice * data[i].quantity;
+  }
+
+  return data.map((holding, index) => {
+    const liveCMPObj = CMP_Data[index];
+    const liveCMPNumber = liveCMPObj?.CMP ?? null;
+
+    const investment = holding.purchasePrice * holding.quantity;
+    const portfolio_percentage: number = (investment / total_invest) * 100;
+
+    const present_val =
+      liveCMPNumber !== null ? liveCMPNumber * holding.quantity : null;
+    const gain_loss = present_val !== null ? present_val - investment : null;
+
+    return {
+      investment,
+      portfolio_percentage,
+      present_val,
+      gain_loss,
+      liveCMP: liveCMPNumber,
+    };
+  });
+};
+/* 
+const CMP = 100;
+data.forEach((val) => {
         const investment:number = val.purchasePrice * val.quantity;
         const portfolio_percentage:number = (investment/total_invest) * 100;
         const present_val:number = CMP * val.quantity;
@@ -31,7 +59,6 @@ export const Calc_output = (data:Portfolio_input_type[]):Calc_output_val_type[] 
         };
 
         res.push(temp_obj)
-    });
+    }); */
 
-    return res;
-}
+// return res;
