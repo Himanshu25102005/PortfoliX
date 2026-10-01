@@ -14,7 +14,7 @@ export interface Portfolio_input_type {
   quantity: number;
   exchange: string;
   sector: string | null;
-  yahooSymbol:string
+  yahooSymbol: string;
 }
 
 export interface Calc_output_val_type {
@@ -22,10 +22,16 @@ export interface Calc_output_val_type {
   portfolio_percentage: number | null;
   present_val: number | null;
   gain_loss: number | null;
-  liveCMP: number | null
+  CMP: number | null;
 }
 
 export interface yahooCMP_type {
   symbol: string;
   CMP: number | null;
+}
+
+export interface google_out_type {
+  symbol: string;
+  PE_ratio: number | null;
+  latestEarnings: number | null;
 }

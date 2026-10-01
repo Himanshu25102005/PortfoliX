@@ -11,6 +11,7 @@ import {
   fetchAllHoldings,
 } from "../services/portfolio.service";
 import { fetchCMPYahoo } from "../services/yahoo.service";
+import { MainGoogleService } from "../services/google.service";
 
 export const getHoldings = (req: Request, res: Response): void => {
   try {
@@ -64,3 +65,21 @@ export const getYahooCMP = async (
     });
   }
 };
+
+export const getGoogleFinData = async(req: Request, res: Response): Promise<void> => {
+  try{
+    const data = await MainGoogleService();
+
+    res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (e) {
+    console.error("Yahoo error:", e);
+
+    res.status(500).json({
+      success: false,
+      msg: "Failed to fetch Yahoo Finance data",
+    });
+  }
+}

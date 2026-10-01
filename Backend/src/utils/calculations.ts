@@ -11,13 +11,13 @@ import { fetchCMPYahoo } from "../services/yahoo.service";
 import type {
   Portfolio_input_type,
   Calc_output_val_type,
+  yahooCMP_type,
 } from "../types/portfolio";
 
-export const Calc_output = async (
+export const Calc_output = (
   data: Portfolio_input_type[],
-): Promise<Calc_output_val_type[]> => {
-  const CMP_Data = await fetchCMPYahoo();
-
+  CMP_Data: yahooCMP_type[],
+): Calc_output_val_type[] => {
   var total_invest: number = 0;
   for (let i: number = 0; i < data.length; i++) {
     total_invest += data[i].purchasePrice * data[i].quantity;
@@ -25,13 +25,12 @@ export const Calc_output = async (
 
   return data.map((holding, index) => {
     const liveCMPObj = CMP_Data[index];
-    const liveCMPNumber = liveCMPObj?.CMP ?? null;
+    const CMP = liveCMPObj?.CMP ?? null;
 
     const investment = holding.purchasePrice * holding.quantity;
     const portfolio_percentage: number = (investment / total_invest) * 100;
 
-    const present_val =
-      liveCMPNumber !== null ? liveCMPNumber * holding.quantity : null;
+    const present_val = CMP !== null ? CMP * holding.quantity : null;
     const gain_loss = present_val !== null ? present_val - investment : null;
 
     return {
@@ -39,7 +38,7 @@ export const Calc_output = async (
       portfolio_percentage,
       present_val,
       gain_loss,
-      liveCMP: liveCMPNumber,
+      CMP: CMP,
     };
   });
 };

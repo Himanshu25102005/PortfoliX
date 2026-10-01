@@ -13,6 +13,7 @@
     "debug": "~2.6.9",
     "dotenv": "^18.0.4",
     "express": "^5.1.0",
+    "serpapi": "^2.2.1",
     "yahoo-finance2": "^4.0.2"
   },
   "devDependencies": {

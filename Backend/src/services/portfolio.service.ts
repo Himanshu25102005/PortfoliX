@@ -15,6 +15,7 @@ import type {
   Portfolio_input_type,
 } from "../types/portfolio";
 import { Calc_output } from "../utils/calculations";
+import { fetchCMPYahoo } from "./yahoo.service";
 
 export const fetchAllHoldings = (): Portfolio_input_type[] => {
   return holdings_data;
@@ -23,7 +24,8 @@ export const fetchAllHoldings = (): Portfolio_input_type[] => {
 type CombinedOutput = Calc_output_val_type & Portfolio_input_type;
 
 export const mergePortfolioData = async (): Promise<CombinedOutput[]> => {
-  const data = await Calc_output(holdings_data);
+  const CMP_Data = await fetchCMPYahoo(); 
+  const data = Calc_output(holdings_data,CMP_Data);
   return holdings_data.map((holding, index) => {
     return {
       ...holding,
