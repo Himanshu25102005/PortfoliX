@@ -615,8 +615,17 @@ export function StocksDashboard() {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="text-sm text-muted-foreground">
-          Loading portfolio...
+        <div className="flex flex-col items-center gap-4 text-center">
+          <div className="size-8 animate-spin rounded-full border-2 border-muted border-t-foreground" />
+
+          <div>
+            <p className="text-sm font-medium">Loading your portfolio</p>
+
+            <p className="mt-1 max-w-sm text-xs text-muted-foreground">
+              Fetching the latest portfolio data. This may take 15–20 seconds
+              while the server wakes up.
+            </p>
+          </div>
         </div>
       </div>
     );
