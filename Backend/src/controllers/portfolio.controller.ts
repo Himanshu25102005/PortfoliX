@@ -25,19 +25,24 @@ export const getHoldings = (req: Request, res: Response): void => {
   }
 };
 
-export const getCalPortData = async(req: Request, res: Response): Promise<void> => {
+export const getCalPortData = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   try {
     const data = await mergePortfolioData();
     const sector_summary = calSectorSummary(data);
     res.status(200).json({
       success: true,
       data,
-      sector_summary
+      sector_summary,
     });
-  } catch (e) {
+  } catch (error) {
+    console.error("Portfolio API error:", error);
+
     res.status(500).json({
       success: false,
-      msg: e,
+      msg: error instanceof Error ? error.message : String(error),
     });
   }
 };
@@ -63,8 +68,11 @@ export const getYahooCMP = async (
   }
 };
 
-export const getGoogleFinData = async(req: Request, res: Response): Promise<void> => {
-  try{
+export const getGoogleFinData = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
     const data = await MainGoogleService();
 
     res.status(200).json({
@@ -79,4 +87,4 @@ export const getGoogleFinData = async(req: Request, res: Response): Promise<void
       msg: "Failed to fetch Yahoo Finance data",
     });
   }
-}
+};
