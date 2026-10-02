@@ -9,7 +9,7 @@ const yahooFinance = new createYahooFinance();
 
 const yahooCache = new TTLCache<yahooCMP_type[]>();
 
-const YAHOO_CACHE_TTL = 15 * 1000; // 15 seconds
+const YAHOO_CACHE_TTL = 15 * 1000;
 
 export const fetchCMPYahoo = async (): Promise<yahooCMP_type[]> => {
 

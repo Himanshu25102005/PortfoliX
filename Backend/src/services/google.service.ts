@@ -13,7 +13,7 @@ const GOOGLE_CACHE_TTL = 60 * 60 * 1000;
 export const fetchGoogleFinance = async (
   symbol: string,
 ): Promise<google_out_type> => {
-  // Check cache first
+ 
   const cachedData = googleCache.get(symbol);
 
   if (cachedData) {
@@ -57,14 +57,12 @@ export const fetchGoogleFinance = async (
       latestEarnings,
     };
 
-    // Cache successful result
     googleCache.set(symbol, result, GOOGLE_CACHE_TTL);
 
     return result;
   } catch (error) {
     console.error(`Google Finance failed for ${symbol}:`, error);
 
-    // Don't let one external API failure break the entire portfolio
     return {
       symbol,
       PE_ratio: null,
