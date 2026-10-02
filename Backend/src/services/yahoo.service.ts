@@ -1,18 +1,38 @@
+import axios from "axios";
+
 import { holdings_data } from "../data/PortfolioInputData";
 import type { yahooCMP_type } from "../types/portfolio";
 
-import createYahooFinance from "yahoo-finance2";
-import type { Quote } from "yahoo-finance2/modules/quote";
-
 import { TTLCache } from "../utils/cache";
-
-const yahooFinance = new createYahooFinance({
-  suppressNotices: ["yahooSurvey"],
-});
 
 const yahooCache = new TTLCache<yahooCMP_type[]>();
 
 const YAHOO_CACHE_TTL = 60 * 1000;
+
+const fetchYahooPrice = async (
+  symbol: string,
+): Promise<number | null> => {
+  try {
+    const response = await axios.get(
+      `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}`,
+      {
+        params: {
+          range: "1d",
+          interval: "1d",
+        },
+        timeout: 5000,
+      },
+    );
+
+    const price =
+      response.data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+
+    return typeof price === "number" ? price : null;
+  } catch (error) {
+    console.error(`Yahoo price failed for ${symbol}:`, error);
+    return null;
+  }
+};
 
 export const fetchCMPYahoo = async (): Promise<yahooCMP_type[]> => {
   const cachedData = yahooCache.get("portfolio-cmp");
@@ -22,46 +42,37 @@ export const fetchCMPYahoo = async (): Promise<yahooCMP_type[]> => {
     return cachedData;
   }
 
-  const symbolArr: string[] = holdings_data.map(
+  const symbolArr = holdings_data.map(
     (holding) => holding.yahooSymbol,
   );
 
   console.log("Requested symbols:", symbolArr.length);
   console.log("Yahoo symbols:", symbolArr);
 
-  try {
-    console.log("Calling Yahoo Finance...");
-
-    const quotes: Quote[] = await yahooFinance.quote(symbolArr);
-
-    console.log("Yahoo response received:", quotes.length);
-
-    const quoteMap = new Map(
-      quotes.map((quote) => [quote.symbol, quote]),
-    );
-
-    const data: yahooCMP_type[] = holdings_data.map((holding) => {
-      const matchingQuote = quoteMap.get(holding.yahooSymbol);
+  const data: yahooCMP_type[] = await Promise.all(
+    symbolArr.map(async (symbol) => {
+      const CMP = await fetchYahooPrice(symbol);
 
       return {
-        symbol: holding.yahooSymbol,
-        CMP: matchingQuote?.regularMarketPrice ?? null,
+        symbol,
+        CMP,
       };
-    });
+    }),
+  );
 
-    yahooCache.set("portfolio-cmp", data, YAHOO_CACHE_TTL);
+  const successfulPrices = data.filter(
+    (item) => item.CMP !== null,
+  ).length;
 
-    return data;
-  } catch (error) {
-    console.error("Yahoo Finance request failed:", error);
+  console.log(
+    `Yahoo prices received: ${successfulPrices}/${data.length}`,
+  );
 
-    const fallbackData: yahooCMP_type[] = holdings_data.map(
-      (holding) => ({
-        symbol: holding.yahooSymbol,
-        CMP: null,
-      }),
-    );
+  yahooCache.set(
+    "portfolio-cmp",
+    data,
+    YAHOO_CACHE_TTL,
+  );
 
-    return fallbackData;
-  }
+  return data;
 };
