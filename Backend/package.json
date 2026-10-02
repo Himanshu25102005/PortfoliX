@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "tsx watch bin/www.ts",
-    "build": "tsc",
-    "start": "npm run build && node ./dist/bin/www.js"
+    "dev": "node init && tsx watch bin/www.ts",
+    "build": "node init && tsc",
+    "start": "node init && npm run build && node ./dist/bin/www.js"
   },
   "dependencies": {
     "axios": "^1.20.0",
